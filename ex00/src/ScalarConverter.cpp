@@ -6,11 +6,13 @@
 /*   By: dbonilla <dbonilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 19:57:48 by dbonilla          #+#    #+#             */
-/*   Updated: 2025/03/11 16:47:51 by dbonilla         ###   ########.fr       */
+/*   Updated: 2025/03/14 12:30:44 by dbonilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/ScalarConverter.hpp"
+
+#include <cmath>
 
 ScalarConverter::ScalarConverter()
 {
@@ -156,7 +158,6 @@ void ScalarConverter::PrintFromInt(int l)
 					<< "double impossible\n";
 		return ;
 	}
-	// i = static_cast<int>(l);
 	if (static_cast<int>(l) >= 32 && static_cast<int>(l) <= 126)
 	{
 		std::cout << "char :'" << static_cast<char>(l) << "'\n";

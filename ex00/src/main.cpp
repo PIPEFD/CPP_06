@@ -6,7 +6,7 @@
 /*   By: dbonilla <dbonilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 11:08:20 by dbonilla          #+#    #+#             */
-/*   Updated: 2025/03/11 16:36:07 by dbonilla         ###   ########.fr       */
+/*   Updated: 2025/03/14 13:10:55 by dbonilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,16 @@
 #include <iostream>
 #include <sstream>
 #include <exception>
-#include <cstdlib>   // rand(), srand()
-#include <ctime>     // time()
-#include <climits>   // INT_MIN, INT_MAX
-#include <cfloat>    // FLT_MIN, FLT_MAX, DBL_MIN, DBL_MAX
+#include <cstdlib>   
+#include <ctime>     
+#include <climits>   
+#include <cfloat>    
 #include <vector>
-#include <iomanip>   // std::fixed, std::setprecision
+#include <iomanip>   
 
 
-// -----------------------------------------------------------------------------
-// Función auxiliar para convertir el enum a string (para visualización)
+
+
 const char* typeToString(ScalarConverter::eLiteralType t)
 {
     switch (t) {
@@ -40,27 +40,27 @@ const char* typeToString(ScalarConverter::eLiteralType t)
     return "UNKNOWN";
 }
 
-// -----------------------------------------------------------------------------
-// Función auxiliar para imprimir el resultado en color: verde [OK] y rojo [FAIL]
-// -----------------------------------------------------------------------------
+
+
+
 static void printResult(bool ok)
 {
     if (ok)
-        std::cout << " \033[32m[OK]\033[0m";    // verde
+        std::cout << " \033[32m[OK]\033[0m";    
     else
-        std::cout << " \033[31m[FAIL]\033[0m";   // rojo
+        std::cout << " \033[31m[FAIL]\033[0m";   
 }
 
-// -----------------------------------------------------------------------------
-// Función auxiliar para testear una literal con el tipo esperado
-// Si detectType es privado, se debe disponer de un método público de depuración
-// (por ejemplo, debugDetectType) que retorne el mismo enum.
-// -----------------------------------------------------------------------------
+
+
+
+
+
 static void testLiteralWithExpected(const std::string &literal,
                                     ScalarConverter::eLiteralType expected)
 {
-    // Utilizamos el wrapper de depuración; si no existe, temporalmente
-    // se puede hacer detectType público para testeo.
+    
+    
     ScalarConverter::eLiteralType detected = ScalarConverter::detectType(literal);
     
     std::cout << "[ Literal: \"" << literal << "\" ]\n";
@@ -71,7 +71,7 @@ static void testLiteralWithExpected(const std::string &literal,
     printResult(ok);
     std::cout << "\n";
 
-    // También invocamos convert() para ver la salida completa
+    
     try {
         ScalarConverter::convert(literal);
     }
@@ -81,9 +81,9 @@ static void testLiteralWithExpected(const std::string &literal,
     std::cout << "-------------------------------------\n";
 }
 
-// -----------------------------------------------------------------------------
-// 1) Generar un int aleatorio en [minVal, maxVal] y testearlo (se espera T_INT)
-// -----------------------------------------------------------------------------
+
+
+
 static void testRandomInts(int nTests, int minVal, int maxVal)
 {
     std::cout << "=== Test random INT between ["
@@ -99,10 +99,10 @@ static void testRandomInts(int nTests, int minVal, int maxVal)
     }
 }
 
-// -----------------------------------------------------------------------------
-// 2) Generar un float aleatorio en [minF, maxF], y testearlo con sufijo 'f'
-//    Se espera T_FLOAT (salvo que el valor sea tan extremo que se convierta en ±inf o nan)
-// -----------------------------------------------------------------------------
+
+
+
+
 static void testRandomFloats(int nTests, float minF, float maxF)
 {
     std::cout << "=== Test random FLOAT between ["
@@ -118,10 +118,10 @@ static void testRandomFloats(int nTests, float minF, float maxF)
     }
 }
 
-// -----------------------------------------------------------------------------
-// 3) Generar un double aleatorio en [minD, maxD], sin sufijo
-//    Se espera T_DOUBLE (salvo casos especiales)
-// -----------------------------------------------------------------------------
+
+
+
+
 static void testRandomDoubles(int nTests, double minD, double maxD)
 {
     std::cout << "=== Test random DOUBLE between ["
@@ -134,15 +134,15 @@ static void testRandomDoubles(int nTests, double minD, double maxD)
         
         std::ostringstream oss;
         std::cout << "DVAL   "<<  dVal << std::endl;
-        // Usamos std::fixed y std::setprecision para asegurar que el literal tenga punto decimal
+        
         oss << std::fixed << std::setprecision(6) << dVal;
         testLiteralWithExpected(oss.str(), ScalarConverter::T_DOUBLE);
     }
 }
 
-// -----------------------------------------------------------------------------
-// 4) Test específico para validar casos del enum (casos fijos)
-// -----------------------------------------------------------------------------
+
+
+
 static void testEnumCases()
 {
     std::cout << "=== Test de casos específicos del enum ===\n";
@@ -172,24 +172,20 @@ static void testEnumCases()
     }
 }
 
-// -----------------------------------------------------------------------------
-// main de prueba
-// -----------------------------------------------------------------------------
+
+
+
 int main()
 {
-    // Inicializamos la semilla de rand()
+    
     std::srand(static_cast<unsigned int>(std::time(NULL)));
 
     try {
-        // 1) Test de casos específicos (enum)
-        testEnumCases();
-
-        // 2) Test aleatorios
+        
+        testEnumCases();        
         testRandomInts(20, -100, 100);
         testRandomFloats(10, -1000.0f, 1000.0f);
-        testRandomDoubles(10, -1.0e6, 1.0e6);
-
-        // 3) Pruebas de rangos extremos
+        testRandomDoubles(10, -1.0e6, 1.0e6);        
         testRandomFloats(5, -FLT_MAX, FLT_MAX);
         testRandomDoubles(5, -DBL_MAX, DBL_MAX);
         testRandomInts(5, INT_MIN, INT_MAX);

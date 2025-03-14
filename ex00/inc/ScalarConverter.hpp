@@ -6,7 +6,7 @@
 /*   By: dbonilla <dbonilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 12:06:13 by dbonilla          #+#    #+#             */
-/*   Updated: 2025/03/11 15:54:32 by dbonilla         ###   ########.fr       */
+/*   Updated: 2025/03/14 12:26:02 by dbonilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@
 
 #include <string>
 #include <iostream>
-#include <cstdlib>   // strtol, strtod, strtof
+#include <cstdlib>  
 #include <limits>
-#include <cctype>    // isdigit
-#include <cstring>   // strcmp, etc.
+#include <cctype>    
+#include <cstring>   
 #include <cmath> 
 #include <iostream>
 

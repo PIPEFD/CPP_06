@@ -1,4 +1,4 @@
-NAME =  
+NAME =  Base
 
 SRC_DIR = src/
 INC = inc/
@@ -6,7 +6,7 @@ INC = inc/
 
 
 SRC_FILES =  main.cpp \
-			.cpp
+			Identify.cpp
 
 SRC         =   $(addprefix $(SRC_DIR), $(SRC_FILES))
 OBJ_DIR		=	objs/
@@ -32,7 +32,7 @@ all:		$(NAME)
 
 $(NAME): $(OBJS_FILES)
 	@$(CXX) -o $(NAME) $(FLAGS) $(OBJS_FILES)
-	@echo "$(GREEN)BUREAUCRAT COMPILED SUCCESSFULLY!$(CLEAR)"
+	@echo "$(GREEN)BASE COMPILED SUCCESSFULLY!$(CLEAR)"
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.cpp
 	@mkdir -p $(OBJ_DIR)
